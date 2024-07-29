@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../Components/firebase'; 
-import { collection, addDoc, getDocs, query, where } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import './Arrangemeeting.css'; 
 import { onAuthStateChanged } from 'firebase/auth'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ArrangeMeeting = () => {
   const [meetingTitle, setMeetingTitle] = useState('');
   const [meetingDescription, setMeetingDescription] = useState('');
   const [meetingDate, setMeetingDate] = useState('');
   const [meetingTime, setMeetingTime] = useState('');
-  const [principalAvailableSlots, setPrincipalAvailableSlots] = useState([]);
-  const [selectedSlot, setSelectedSlot] = useState('');
   const [meetingPurpose, setMeetingPurpose] = useState('');
   const [user, setUser] = useState(null); 
 
   useEffect(() => {
-    
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user); 
@@ -27,21 +26,10 @@ const ArrangeMeeting = () => {
     return () => unsubscribe(); 
   }, []);
 
-  useEffect(() => {
-    const fetchAvailableSlots = async () => {
-      const q = query(collection(db, 'availability'), where('status', '==', 'available'));
-      const querySnapshot = await getDocs(q);
-      const slots = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPrincipalAvailableSlots(slots);
-    };
-
-    fetchAvailableSlots();
-  }, []);
-
   const handleArrangeMeeting = async (e) => {
     e.preventDefault();
 
-    if (!user || !selectedSlot) return;
+    if (!user) return;
 
     await addDoc(collection(db, 'meetings'), {
       userId: user.uid,
@@ -50,17 +38,19 @@ const ArrangeMeeting = () => {
       date: meetingDate,
       time: meetingTime,
       purpose: meetingPurpose,
-      slotId: selectedSlot,
       status: 'booked',
       created_at: new Date().toISOString(),
     });
 
+    // Reset form fields
     setMeetingTitle('');
     setMeetingDescription('');
     setMeetingDate('');
     setMeetingTime('');
-    setSelectedSlot('');
     setMeetingPurpose('');
+
+    // Show success notification
+    toast.success("Meeting scheduling successful!");
   };
 
   return (
@@ -92,16 +82,6 @@ const ArrangeMeeting = () => {
           onChange={(e) => setMeetingTime(e.target.value)}
           required
         />
-        <select
-          value={selectedSlot}
-          onChange={(e) => setSelectedSlot(e.target.value)}
-          required
-        >
-          <option value="">Select Available Slot</option>
-          {principalAvailableSlots.map(slot => (
-            <option key={slot.id} value={slot.id}>{slot.date} - {slot.time}</option>
-          ))}
-        </select>
         <textarea
           value={meetingPurpose}
           onChange={(e) => setMeetingPurpose(e.target.value)}
@@ -110,6 +90,7 @@ const ArrangeMeeting = () => {
         />
         <button type="submit">Arrange Meeting</button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
