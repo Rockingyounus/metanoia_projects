@@ -1,0 +1,35 @@
+.dashboard-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.dashboard-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.meetings-list {
+    margin-top: 2rem;
+}
+
+.meeting-item {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.meeting-item p {
+    margin: 0.5rem 0;
+}
+
+.meeting-item p strong {
+    display: inline-block;
+    width: 100px;
+}

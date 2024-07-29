@@ -1,0 +1,237 @@
+/* Sidebar and general layout */
+.todo-list-container {
+  display: flex;
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.profile-container p {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1;
+  flex-direction: column;
+}
+
+.profile-icon:hover .dropdown-menu,
+.profile-icon:focus .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu a {
+  padding: 10px 20px;
+  display: block;
+  color: black;
+  text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+
+.menu, .templates {
+  margin-top: 20px;
+}
+
+.menu-item, .menu-sub-item, .projects .menu-item {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item:hover, .menu-sub-item:hover, .projects .menu-item:hover {
+  background-color: #e0e0e0;
+}
+
+.projects {
+  margin-top: 20px;
+}
+
+.projects .menu-item {
+  font-weight: bold;
+}
+
+.projects .menu-sub-item {
+  padding-left: 20px;
+}
+
+.projects .menu-sub-item.selected {
+  background-color: #e0e0e0;
+  color: #007bff;
+}
+
+.add-task-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.add-task-button svg {
+  margin-right: 5px;
+}
+
+.add-task-button:hover {
+  background-color: #218838;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-task-input, .add-task-textarea {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-task-textarea {
+  resize: none;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.task-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+}
+
+.task-item:hover {
+  background-color: #f1f1f1;
+}
+
+.task-text {
+  font-size: 16px;
+  color: #333;
+}
+
+.task-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Modal styles */
+.modal {
+  background: white;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal-button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.close-modal-button:hover {
+  background: #c82333;
+}
+
+.arrange-meetings {
+  background-color: #28a745;
+}
+
+.arrange-meetings:hover {
+  background-color: #218838;
+}

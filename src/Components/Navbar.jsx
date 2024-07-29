@@ -20,7 +20,7 @@ const Navbar = () => {
         <>
             <nav className="navbar">
                 <div className="navbar-brand">
-                    <Link to="/" className='navbar-brand-logo'>YourBrand</Link>
+                    <Link to="/" className='navbar-brand-logo'>Metanoia</Link>
                 </div>
                 <div className="navbar-links">
                     <ul>
@@ -38,6 +38,8 @@ const Navbar = () => {
                                     <Link to="/Login">login</Link>
                                     <Link to="/logout">Logout</Link>
                                     <Link to="/Createaccount">Create Account</Link>
+                                    <Link to="/Principallogin">Principal Login</Link>
+                                    <Link to="/Createprincipalaccount">Create principal account</Link>
                                 </div>
                             )}
                         </li>

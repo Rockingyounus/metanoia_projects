@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import './Createaccount.css';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { app } from './firebase';
+import { getDatabase, ref, set } from 'firebase/database';
+import { app } from './firebase'; 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const auth = getAuth(app);
+const database = getDatabase(app);
 
 const Createaccount = () => {
   const [username, setUsername] = useState('');
@@ -29,12 +31,20 @@ const Createaccount = () => {
     } else {
       setError('');
       createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((userCredential) => {
+          const user = userCredential.user;
           toast.success('Account created successfully');
+       
+          return set(ref(database, 'profiles/' + user.uid), {
+            username: username,
+            email: user.email,
+          });
+        })
+        .then(() => {
           setTimeout(() => {
-            navigate('/login'); // Redirect to login page
-          }, 1500); // Wait for 1.5 seconds to show the toast message
-         })
+            navigate('/login'); 
+          }, 1500); 
+        })
         .catch((error) => {
           toast.error('Error creating account: ' + error.message);
         });

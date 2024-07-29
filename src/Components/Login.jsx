@@ -12,21 +12,21 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // Hook for redirection
+    const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault(); 
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
             toast.success("Login successful!");
             setTimeout(() => {
-                navigate('/'); // Redirect to login page
+                navigate('/Userprofile'); 
               }, 1500);
            
         } catch (err) {
             toast.error("Login failed. Please check your credentials.");
-            setError(err.message); // Set error message for display
+            setError(err.message); 
         }
     };
 
